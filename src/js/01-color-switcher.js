@@ -22,6 +22,8 @@ function onStartBtnClick() {
 
 function onEndBtnClick() {
     clearInterval(timerId);
+    startButton.removeAttribute('disabled');
+    endButton.setAttribute('disabled', 'disabled');
 }
 
 function getRandomHexColor() {
