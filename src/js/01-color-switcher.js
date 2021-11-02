@@ -1,29 +1,31 @@
-const startButton = document.querySelector('button[data-start]');
-const endButton = document.querySelector('button[data-stop]');
-const body = document.querySelector('body');
+const refs = {
+    startButton: document.querySelector('button[data-start]'),
+    endButton: document.querySelector('button[data-stop]'),
+    body: document.querySelector('body'),
+};
 let timerId = null;
 
-endButton.setAttribute('disabled', 'disabled');
+refs.endButton.setAttribute('disabled', 'disabled');
 
-startButton.addEventListener('click', () => {
+refs.startButton.addEventListener('click', () => {
     timerId = setInterval(() => {
         onStartBtnClick();
     }, 1000);
 });
 
-endButton.addEventListener('click', onEndBtnClick)
+refs.endButton.addEventListener('click', onEndBtnClick)
 
 function onStartBtnClick() {
-    endButton.removeAttribute('disabled');
-    startButton.setAttribute('disabled', 'disabled');
-    body.style.backgroundColor = getRandomHexColor();
+    refs.endButton.removeAttribute('disabled');
+    refs.startButton.setAttribute('disabled', 'disabled');
+    refs.body.style.backgroundColor = getRandomHexColor();
     
 }
 
 function onEndBtnClick() {
     clearInterval(timerId);
-    startButton.removeAttribute('disabled');
-    endButton.setAttribute('disabled', 'disabled');
+    refs.startButton.removeAttribute('disabled');
+    refs.endButton.setAttribute('disabled', 'disabled');
 }
 
 function getRandomHexColor() {
