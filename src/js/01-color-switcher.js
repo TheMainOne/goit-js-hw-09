@@ -9,24 +9,20 @@ startButton.addEventListener('click', () => {
     }, 1000);
 });
 
-
-// startBtn.addEventListener("click", () => {
-//   timerId = setInterval(() => {
-//     console.log(`I love async JS!  ${Math.random()}`);
-//   }, 1000);
-// });
-
+endButton.addEventListener('click', onEndBtnClick)
 
 function onStartBtnClick() {
     body.style.backgroundColor = getRandomHexColor();
+}
+
+function onEndBtnClick() {
+    clearInterval(timerId);
 }
 
 
 function getRandomHexColor() {
   return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
 }
-
-// console.log(body);
 
 
 // Напиши скрипт, который после нажатия кнопки «Start», раз в секунду меняет цвет фона <body> 
