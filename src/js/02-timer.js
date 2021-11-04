@@ -1,6 +1,10 @@
 import flatpickr from "flatpickr";
 import 'flatpickr/dist/flatpickr.min.css';
 
+const daysSpan = document.querySelector('span[data-days]');
+const hoursSpan = document.querySelector('span[data-hours]');
+const minutesSpan = document.querySelector('span[data-minutes]');
+const secondsSpan = document.querySelector('span[data-seconds]');
 const myInput = document.querySelector("#datetime-picker");
 const options = {
   enableTime: true,
@@ -9,18 +13,22 @@ const options = {
   minuteIncrement: 1,
   onClose(selectedDates) {
     const choosenTime = selectedDates[0].getTime();
-    const currentTime = Date.now();
 
-    if (choosenTime < currentTime) {
+    if (choosenTime < Date.now()) {
       window.alert('Please choose a date in the future')
     } else {
       button.removeAttribute('disabled');
 
       setInterval(() => {
-        const nowTime = Date.now();
-        const deltaTime = choosenTime - nowTime;
+        const currentTime = Date.now();
+        const deltaTime = choosenTime - currentTime;
         const { days, hours, minutes, seconds } = convertMs(deltaTime);
-              console.log(`${days}:${hours}:${minutes}:${seconds}`);
+
+        daysSpan.textContent = `${days}`;
+        hoursSpan.textContent = `${hours}`;
+        minutesSpan.textContent = `${minutes}`;
+        secondsSpan.textContent = `${seconds}`;
+
       }, 1000);
     }
   },
