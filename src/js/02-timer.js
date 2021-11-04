@@ -33,6 +33,10 @@ const options = {
 
         if (deltaTime <= 0) {
           clearInterval(timerId);
+        daysSpan.textContent = '00';
+        hoursSpan.textContent = '00';
+        minutesSpan.textContent = '00';
+        secondsSpan.textContent = '00';
         }
       }, 1000);
     }
