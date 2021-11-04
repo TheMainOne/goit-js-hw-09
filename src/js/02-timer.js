@@ -1,6 +1,7 @@
 import flatpickr from "flatpickr";
 import 'flatpickr/dist/flatpickr.min.css';
 
+let timerId = null;
 const daysSpan = document.querySelector('span[data-days]');
 const hoursSpan = document.querySelector('span[data-hours]');
 const minutesSpan = document.querySelector('span[data-minutes]');
@@ -19,9 +20,17 @@ const options = {
     } else {
       button.removeAttribute('disabled');
 
-      setInterval(() => {
+// startBtn.addEventListener("click", () => {
+//   timerId = setInterval(() => {
+//     console.log(`I love async JS!  ${Math.random()}`);
+//   }, 1000);
+// });
+
+
+        timerId = setInterval(() => {
         const currentTime = Date.now();
         const deltaTime = choosenTime - currentTime;
+        console.log(deltaTime);
         const { days, hours, minutes, seconds } = convertMs(deltaTime);
 
         daysSpan.textContent = `${days}`;
@@ -29,6 +38,9 @@ const options = {
         minutesSpan.textContent = `${minutes}`;
         secondsSpan.textContent = `${seconds}`;
 
+        if (deltaTime <= 0) {
+          clearInterval(timerId);
+        }
       }, 1000);
     }
   },
@@ -39,7 +51,7 @@ const button = document.querySelector('button[data-start]');
 button.setAttribute('disabled', 'disabled');
 
 
-function pad(value) {
+function addLeadingZero(value) {
   return String(value).padStart(2, "0")
 }
 
@@ -49,10 +61,10 @@ function convertMs(ms) {
   const hour = minute * 60;
   const day = hour * 24;
 
-  const days = pad(Math.floor(ms / day));
-  const hours = pad(Math.floor((ms % day) / hour));
-  const minutes = pad(Math.floor(((ms % day) % hour) / minute));
-  const seconds = pad(Math.floor((((ms % day) % hour) % minute) / second));
+  const days = addLeadingZero(Math.floor(ms / day));
+  const hours = addLeadingZero(Math.floor((ms % day) / hour));
+  const minutes = addLeadingZero(Math.floor(((ms % day) % hour) / minute));
+  const seconds = addLeadingZero(Math.floor((((ms % day) % hour) % minute) / second));
 
   return { days, hours, minutes, seconds };
 }
