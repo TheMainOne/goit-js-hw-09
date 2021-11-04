@@ -10,6 +10,7 @@ const options = {
   onClose(selectedDates) {
     const choosenTime = selectedDates[0].getTime();
     const currentTime = Date.now();
+    
     if (choosenTime < currentTime) {
       window.alert('Please choose a date in the future')
     } else {
