@@ -20,13 +20,6 @@ const options = {
     } else {
       button.removeAttribute('disabled');
 
-// startBtn.addEventListener("click", () => {
-//   timerId = setInterval(() => {
-//     console.log(`I love async JS!  ${Math.random()}`);
-//   }, 1000);
-// });
-
-
         timerId = setInterval(() => {
         const currentTime = Date.now();
         const deltaTime = choosenTime - currentTime;
