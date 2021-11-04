@@ -8,7 +8,8 @@ const options = {
   minuteIncrement: 1,
   onClose(selectedDates) {
     const choosenTime = selectedDates[0].getTime();
-    if (choosenTime < new Date().getTime()) {
+    const currentTime = new Date().getTime();
+    if (choosenTime < currentTime) {
       window.alert('Please choose a date in the future')
     }
   },
