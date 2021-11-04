@@ -19,4 +19,4 @@ parcelRequire=function(e,r,t,n){var i,o="function"==typeof parcelRequire&&parcel
 },{}],"d2uN":[function(require,module,exports) {
 "use strict";var e=t(require("flatpickr"));function t(e){return e&&e.__esModule?e:{default:e}}require("flatpickr/dist/flatpickr.min.css");const r=document.querySelector("#datetime-picker"),o={enableTime:!0,time_24hr:!0,defaultDate:new Date,minuteIncrement:1,onClose(e){const t=e[0].getTime(),r=Date.now();t<r?window.alert("Please choose a date in the future"):(n.removeAttribute("disabled"),setInterval(()=>{console.log(i(r-t))},1e3))}},a=(0,e.default)(r,o),n=document.querySelector("button[data-start]");function i(e){return{days:Math.floor(e/864e5),hours:Math.floor(e%864e5/36e5),minutes:Math.floor(e%864e5%36e5/6e4),seconds:Math.floor(e%864e5%36e5%6e4/1e3)}}n.setAttribute("disabled","disabled");
 },{"flatpickr":"BKNP","flatpickr/dist/flatpickr.min.css":"c0Wa"}]},{},["d2uN"], null)
-//# sourceMappingURL=/goit-js-hw-09/02-timer.0d35e609.js.map
+//# sourceMappingURL=/goit-js-hw-09/02-timer.5f859e7c.js.map
