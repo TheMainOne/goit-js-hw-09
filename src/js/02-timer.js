@@ -2,6 +2,7 @@ import flatpickr from "flatpickr";
 import 'flatpickr/dist/flatpickr.min.css';
 
 let timerId = null;
+let choosenTime = 0;
 const daysSpan = document.querySelector('span[data-days]');
 const hoursSpan = document.querySelector('span[data-hours]');
 const minutesSpan = document.querySelector('span[data-minutes]');
@@ -13,17 +14,26 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-    const choosenTime = selectedDates[0].getTime();
+    choosenTime = selectedDates[0].getTime();
 
     if (choosenTime < Date.now()) {
       window.alert('Please choose a date in the future')
     } else {
       button.removeAttribute('disabled');
+    }
+  },
+};
+const fp = flatpickr(myInput, options);
+const button = document.querySelector('button[data-start]');
 
-        timerId = setInterval(() => {
+button.setAttribute('disabled', 'disabled');
+button.addEventListener('click', onButtonHandler);
+
+function onButtonHandler() {
+      timerId = setInterval(() => {
+       button.setAttribute('disabled', 'disabled');
         const currentTime = Date.now();
         const deltaTime = choosenTime - currentTime;
-        console.log(deltaTime);
         const { days, hours, minutes, seconds } = convertMs(deltaTime);
 
         daysSpan.textContent = `${days}`;
@@ -39,14 +49,7 @@ const options = {
         secondsSpan.textContent = '00';
         }
       }, 1000);
-    }
-  },
-};
-const fp = flatpickr(myInput, options);
-const button = document.querySelector('button[data-start]');
-
-button.setAttribute('disabled', 'disabled');
-
+}
 
 function addLeadingZero(value) {
   return String(value).padStart(2, "0")
