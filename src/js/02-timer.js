@@ -7,7 +7,10 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-    console.log(selectedDates[0]);
+    const choosenTime = selectedDates[0].getTime();
+    if (choosenTime < new Date().getTime()) {
+      window.alert('Please choose a date in the future')
+    }
   },
 };
 const myInput = document.querySelector("#datetime-picker");
