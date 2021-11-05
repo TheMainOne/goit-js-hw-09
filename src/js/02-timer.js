@@ -30,8 +30,10 @@ button.setAttribute('disabled', 'disabled');
 button.addEventListener('click', onButtonHandler);
 
 function onButtonHandler() {
+        button.setAttribute('disabled', 'disabled');
+        myInput.setAttribute('disabled', 'disabled');
+
       timerId = setInterval(() => {
-       button.setAttribute('disabled', 'disabled');
         const currentTime = Date.now();
         const deltaTime = choosenTime - currentTime;
         const { days, hours, minutes, seconds } = convertMs(deltaTime);
