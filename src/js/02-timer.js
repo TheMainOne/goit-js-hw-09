@@ -3,10 +3,10 @@ import 'flatpickr/dist/flatpickr.min.css';
 
 let timerId = null;
 let choosenTime = 0;
-const daysSpan = document.querySelector('span[data-days]');
-const hoursSpan = document.querySelector('span[data-hours]');
-const minutesSpan = document.querySelector('span[data-minutes]');
-const secondsSpan = document.querySelector('span[data-seconds]');
+const daysContainer = document.querySelector('span[data-days]');
+const hoursContainer = document.querySelector('span[data-hours]');
+const minutesContainer = document.querySelector('span[data-minutes]');
+const secondsContainer = document.querySelector('span[data-seconds]');
 const myInput = document.querySelector("#datetime-picker");
 const options = {
   enableTime: true,
@@ -36,17 +36,17 @@ function onButtonHandler() {
         const deltaTime = choosenTime - currentTime;
         const { days, hours, minutes, seconds } = convertMs(deltaTime);
 
-        daysSpan.textContent = `${days}`;
-        hoursSpan.textContent = `${hours}`;
-        minutesSpan.textContent = `${minutes}`;
-        secondsSpan.textContent = `${seconds}`;
+        daysContainer.textContent = `${days}`;
+        hoursContainer.textContent = `${hours}`;
+        minutesContainer.textContent = `${minutes}`;
+        secondsContainer.textContent = `${seconds}`;
 
         if (deltaTime <= 0) {
           clearInterval(timerId);
-        daysSpan.textContent = '00';
-        hoursSpan.textContent = '00';
-        minutesSpan.textContent = '00';
-        secondsSpan.textContent = '00';
+        daysContainer.textContent = '00';
+        hoursContainer.textContent = '00';
+        minutesContainer.textContent = '00';
+        secondsContainer.textContent = '00';
         }
       }, 1000);
 }
