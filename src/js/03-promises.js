@@ -12,13 +12,13 @@ function onSubmitHandler(event) {
 
   const { delay, step, amount } = Object.fromEntries(new FormData(refs.form));
 
-  for (let i = 1; i < amount - 1; i += 1) {
+  for (let i = 0; i < amount; i += 1) {
     const firstDelay = Number(delay);
     let ourStep = firstDelay;
 
-    createPromise(i, ourStep).then(value => Notify.success(value)).catch(error => Notify.failure(error));
+    createPromise(i + 1, ourStep).then(value => Notify.success(value)).catch(error => Notify.failure(error));
     ourStep += Number(step);
-    console.log(ourStep);
+    console.log(i);
   }
 }
 
