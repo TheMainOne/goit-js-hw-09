@@ -10,15 +10,22 @@ refs.form.addEventListener('submit', onSubmitHandler);
 function onSubmitHandler(event) {
   event.preventDefault();
 
-  const { delay, step, amount } = Object.fromEntries(new FormData(refs.form));
+  const {
+    elements: { delay, step, amount}
+  } = event.currentTarget;
+  let firstDelay = Number(delay.value);
+  let delayStep = Number(step.value);
+  let selectedAmount = Number(amount.value);
 
-  for (let i = 0; i < amount; i += 1) {
-    const firstDelay = Number(delay);
-    let ourStep = firstDelay;
-
-    createPromise(i + 1, ourStep).then(value => Notify.success(value)).catch(error => Notify.failure(error));
-    ourStep += Number(step);
-    console.log(i);
+  for (let i = 1; i <= selectedAmount; i += 1) {
+      createPromise(i, firstDelay)
+      .then(({ position, delay }) => {
+        Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
+      })
+      .catch(({ position, delay }) => {
+        Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
+      })
+      firstDelay += delayStep;
   }
 }
 
@@ -28,10 +35,11 @@ function createPromise(position, delay) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       if (shouldResolve) {
-        resolve(`✅ Fulfilled promise ${position} in ${delay}ms`);
+        resolve({position, delay});
       } else {
-        reject(`❌ Rejected promise ${position} in ${delay}ms`);
+        reject({position, delay});
       }
     }, delay);
   });
 }
+
