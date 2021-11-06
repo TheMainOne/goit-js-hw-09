@@ -17,6 +17,15 @@ img {
   max-width: 100%;
 }
 
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.container > button:not(:last-child) {
+  margin-right: 5px;
+}
+
 .timer {
   display: flex;
 }
