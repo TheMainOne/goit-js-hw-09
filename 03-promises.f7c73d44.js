@@ -20,4 +20,4 @@ var t,o=arguments[3];!function(o,i){"function"==typeof t&&t.amd?t([],function(){
 },{}],"GyVV":[function(require,module,exports) {
 "use strict";var e=require("lodash"),t=require("notiflix/build/notiflix-notify-aio");const i={form:document.querySelector(".form")};function o(e){e.preventDefault();const{elements:{delay:i,step:o,amount:n}}=e.currentTarget;let u=Number(i.value),s=Number(o.value),l=Number(n.value);for(let a=1;a<=l;a+=1)r(a,u).then(e=>{t.Notify.success(`✅ Fulfilled promise ${e.position} in ${e.delay}ms`)}).catch(e=>{t.Notify.failure(`❌ Rejected promise ${e.position} in ${e.delay}ms`)}),u+=s}function r(e,t){const i=Math.random()>.3,o={position:e,delay:t};return new Promise((e,r)=>{setTimeout(()=>{i?e(o):r(o)},t)})}i.form.addEventListener("submit",o);
 },{"lodash":"B1iE","notiflix/build/notiflix-notify-aio":"MeeU"}]},{},["GyVV"], null)
-//# sourceMappingURL=/goit-js-hw-09/03-promises.40b1638c.js.map
+//# sourceMappingURL=/goit-js-hw-09/03-promises.f7c73d44.js.map
