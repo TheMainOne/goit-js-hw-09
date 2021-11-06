@@ -13,17 +13,18 @@ function onSubmitHandler(event) {
   const {
     elements: { delay, step, amount}
   } = event.currentTarget;
+
   let firstDelay = Number(delay.value);
   let delayStep = Number(step.value);
   let selectedAmount = Number(amount.value);
 
   for (let i = 1; i <= selectedAmount; i += 1) {
       createPromise(i, firstDelay)
-      .then(({ position, delay }) => {
-        Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
+      .then((promiseData) => {
+        Notify.success(`✅ Fulfilled promise ${promiseData.position} in ${promiseData.delay}ms`);
       })
-      .catch(({ position, delay }) => {
-        Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
+      .catch((promiseData) => {
+        Notify.failure(`❌ Rejected promise ${promiseData.position} in ${promiseData.delay}ms`);
       })
       firstDelay += delayStep;
   }
@@ -32,12 +33,17 @@ function onSubmitHandler(event) {
 function createPromise(position, delay) {
   const shouldResolve = Math.random() > 0.3;
 
+  const data = {
+    position,
+    delay,
+  }
+
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       if (shouldResolve) {
-        resolve({position, delay});
+        resolve(data);
       } else {
-        reject({position, delay});
+        reject(data);
       }
     }, delay);
   });
