@@ -1,4 +1,4 @@
-import flatpickr from "flatpickr";
+import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
@@ -8,7 +8,7 @@ const daysContainer = document.querySelector('span[data-days]');
 const hoursContainer = document.querySelector('span[data-hours]');
 const minutesContainer = document.querySelector('span[data-minutes]');
 const secondsContainer = document.querySelector('span[data-seconds]');
-const myInput = document.querySelector("#datetime-picker");
+const myInput = document.querySelector('#datetime-picker');
 const options = {
   enableTime: true,
   time_24hr: true,
@@ -18,8 +18,7 @@ const options = {
     choosenTime = selectedDates[0].getTime();
 
     if (choosenTime < Date.now()) {
-      Notify.failure('Please choose a date in the future', {cssAnimationStyle: 'from-right'});
-
+      Notify.failure('Please choose a date in the future', { cssAnimationStyle: 'from-right' });
     } else {
       button.removeAttribute('disabled');
     }
@@ -32,31 +31,31 @@ button.setAttribute('disabled', 'disabled');
 button.addEventListener('click', onButtonHandler);
 
 function onButtonHandler() {
-        button.setAttribute('disabled', 'disabled');
-        myInput.setAttribute('disabled', 'disabled');
+  button.setAttribute('disabled', 'disabled');
+  myInput.setAttribute('disabled', 'disabled');
 
-      timerId = setInterval(() => {
-        const currentTime = Date.now();
-        const deltaTime = choosenTime - currentTime;
-        const { days, hours, minutes, seconds } = convertMs(deltaTime);
+  timerId = setInterval(() => {
+    const currentTime = Date.now();
+    const deltaTime = choosenTime - currentTime;
+    const { days, hours, minutes, seconds } = convertMs(deltaTime);
 
-        daysContainer.textContent = `${days}`;
-        hoursContainer.textContent = `${hours}`;
-        minutesContainer.textContent = `${minutes}`;
-        secondsContainer.textContent = `${seconds}`;
+    daysContainer.textContent = `${days}`;
+    hoursContainer.textContent = `${hours}`;
+    minutesContainer.textContent = `${minutes}`;
+    secondsContainer.textContent = `${seconds}`;
 
-        if (deltaTime <= 0) {
-          clearInterval(timerId);
-        daysContainer.textContent = '00';
-        hoursContainer.textContent = '00';
-        minutesContainer.textContent = '00';
-        secondsContainer.textContent = '00';
-        }
-      }, 1000);
+    if (deltaTime <= 0) {
+      clearInterval(timerId);
+      daysContainer.textContent = '00';
+      hoursContainer.textContent = '00';
+      minutesContainer.textContent = '00';
+      secondsContainer.textContent = '00';
+    }
+  }, 1000);
 }
 
 function addLeadingZero(value) {
-  return String(value).padStart(2, "0")
+  return String(value).padStart(2, '0');
 }
 
 function convertMs(ms) {

@@ -11,7 +11,7 @@ function onSubmitHandler(event) {
   event.preventDefault();
 
   const {
-    elements: { delay, step, amount}
+    elements: { delay, step, amount },
   } = event.currentTarget;
 
   let firstDelay = Number(delay.value);
@@ -19,14 +19,14 @@ function onSubmitHandler(event) {
   let selectedAmount = Number(amount.value);
 
   for (let i = 1; i <= selectedAmount; i += 1) {
-      createPromise(i, firstDelay)
-      .then((promiseData) => {
+    createPromise(i, firstDelay)
+      .then(promiseData => {
         Notify.success(`✅ Fulfilled promise ${promiseData.position} in ${promiseData.delay}ms`);
       })
-      .catch((promiseData) => {
+      .catch(promiseData => {
         Notify.failure(`❌ Rejected promise ${promiseData.position} in ${promiseData.delay}ms`);
-      })
-      firstDelay += delayStep;
+      });
+    firstDelay += delayStep;
   }
 }
 
@@ -36,7 +36,7 @@ function createPromise(position, delay) {
   const data = {
     position,
     delay,
-  }
+  };
 
   return new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -48,4 +48,3 @@ function createPromise(position, delay) {
     }, delay);
   });
 }
-
