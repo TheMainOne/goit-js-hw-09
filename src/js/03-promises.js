@@ -1,4 +1,3 @@
-import { reject, set } from 'lodash';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const refs = {
